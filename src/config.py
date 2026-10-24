@@ -10,14 +10,14 @@ ROOT = Path(__file__).resolve().parent.parent
 
 
 class Settings(BaseModel):
-    # OpenAI
+    # GROQ
     groq_api_key: str = os.getenv("GROQ_API_KEY", "")
-    groq_model: str = os.getenv("GROQ_MODEL", "gpt-5-mini")
+    groq_model: str = os.getenv("GROQ_MODEL", "llama-3.3-70b-versatile")
     embedding_model: str = os.getenv("EMBEDDING_MODEL", "sentence-transformers/all-MiniLM-L6-v2")
 
     # Pinecone
     pinecone_api_key: str = os.getenv("PINECONE_API_KEY", "")
-    pinecone_index_name: str = os.getenv("PINECONE_INDEX_NAME", "cloudops-sentinel-openai-self-rag")
+    pinecone_index_name: str = os.getenv("PINECONE_INDEX_NAME", "cloudops-sentinel-groq-self-rag")
     pinecone_namespace: str = os.getenv("PINECONE_NAMESPACE", "incident-runbooks")
     pinecone_cloud: str = os.getenv("PINECONE_CLOUD", "aws")
     pinecone_region: str = os.getenv("PINECONE_REGION", "us-east-1")

@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#f5f6fa" />
+  <title>CloudOps Sentinel | Incident Workspace</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="/" aria-label="CloudOps Sentinel home">
+        <span class="brand-mark"><span></span><span></span><span></span></span>
+        <span class="brand-copy"><strong>cloudops<span>sentinel</span></strong><small>OPERATIONS INTELLIGENCE</small></span>
+      </a>
+
+      <div class="side-section-label">WORKSPACE</div>
+      <nav class="nav" aria-label="Main navigation">
+        <button class="nav-item active" type="button"><span class="nav-icon">◫</span><span>Incident workspace</span><span class="nav-count">01</span></button>
+        <button class="nav-item" type="button"><span class="nav-icon">▤</span><span>Runbook library</span></button>
+        <button class="nav-item" type="button"><span class="nav-icon">⌁</span><span>Activity &amp; audit</span></button>
+      </nav>
+
+      <section class="knowledge-card">
+        <div class="card-kicker"><span class="kicker-dot"></span> KNOWLEDGE BASE</div>
+        <h2>Enrich your runbooks</h2>
+        <p>Add operational guides and incident notes to your private retrieval index.</p>
+        <label class="dropzone" for="fileInput">
+          <input id="fileInput" type="file" accept=".pdf,.txt,.md,.docx" />
+          <span class="upload-symbol">↑</span>
+          <strong id="fileLabel">Choose a file</strong>
+          <small>PDF, TXT, MD or DOCX</small>
+        </label>
+        <button id="uploadBtn" class="upload-button" type="button">Add to knowledge base <span>↗</span></button>
+        <div id="uploadStatus" class="status" role="status" aria-live="polite"></div>
+      </section>
+
+      <div class="sidebar-bottom">
+        <div class="service-status"><span class="status-indicator"></span><div><strong>Retrieval engine</strong><small>Connected · Pinecone</small></div></div>
+        <div class="sidebar-footnote">PRIVATE BY DESIGN <span>•</span> INCIDENT-AWARE</div>
+      </div>
+    </aside>
+
+    <main class="main-area">
+      <header class="topbar">
+        <div>
+          <div class="breadcrumb">OPERATIONS <span>/</span> INCIDENT RESPONSE</div>
+          <h1>Incident workspace</h1>
+          <p>Investigate production issues with answers grounded in your runbooks and supporting evidence.</p>
+        </div>
+        <div class="topbar-right">
+          <div class="system-pill"><span class="status-indicator"></span> SYSTEM READY</div>
+          <div class="user-chip"><span class="user-avatar">OC</span><span><strong>On-call engineer</strong><small>Production team</small></span></div>
+        </div>
+      </header>
+
+      <section class="overview">
+        <div class="overview-heading"><div><span class="section-eyebrow">HOW IT WORKS</span><h2>Evidence-led incident support</h2></div><span class="overview-note">SELF-RAG PIPELINE</span></div>
+        <div class="pipeline">
+          <article class="pipeline-step"><span class="step-number">01</span><div class="step-icon">⌕</div><div><strong>Retrieve</strong><small>Search private runbooks</small></div></article>
+          <span class="pipeline-arrow">→</span>
+          <article class="pipeline-step"><span class="step-number">02</span><div class="step-icon">◎</div><div><strong>Evaluate</strong><small>Grade evidence relevance</small></div></article>
+          <span class="pipeline-arrow">→</span>
+          <article class="pipeline-step"><span class="step-number">03</span><div class="step-icon">✓</div><div><strong>Verify</strong><small>Check support &amp; usefulness</small></div></article>
+          <span class="pipeline-arrow">→</span>
+          <article class="pipeline-step"><span class="step-number">04</span><div class="step-icon">↻</div><div><strong>Remember</strong><small>Maintain session context</small></div></article>
+        </div>
+      </section>
+
+      <section class="workspace-card">
+        <div class="workspace-header">
+          <div class="workspace-title"><span class="conversation-icon">✳</span><div><h2>Incident assistant</h2><p>Describe the symptom. Build context as you investigate.</p></div></div>
+          <div class="session-actions"><span id="sessionId" class="session-id">SESSION / LIVE</span><button id="newSessionBtn" class="new-session-btn" type="button"><span>＋</span> New session</button></div>
+        </div>
+
+        <div id="messages" class="messages" aria-live="polite">
+          <div class="message assistant">
+            <div class="avatar assistant-avatar">S</div>
+            <div class="message-body">
+              <div class="message-label">CLOUDOPS SENTINEL <span>•</span> READY TO HELP</div>
+              <div class="bubble intro">Hi! I’m your incident response copilot. Share a production symptom, deployment issue, or infrastructure alert. I’ll look for relevant internal runbooks first, verify the available evidence, and keep context across follow-up questions.</div>
+            </div>
+          </div>
+        </div>
+
+        <div id="starterPrompts" class="starters">
+          <span class="starter-label">TRY ASKING</span>
+          <button data-q="Our checkout API is returning 502 errors after deployment. What should the on-call engineer check first?">Checkout API · 502 errors <span>↗</span></button>
+          <button data-q="CPU on the payments service is above 90%. What is our recommended response procedure?">Payments · High CPU <span>↗</span></button>
+          <button data-q="What should I verify when a Kubernetes pod keeps restarting with CrashLoopBackOff?">Kubernetes · CrashLoopBackOff <span>↗</span></button>
+        </div>
+
+        <div class="composer-area">
+          <div class="composer">
+            <textarea id="question" rows="2" aria-label="Incident question" placeholder="Describe the incident or ask an operations question..."></textarea>
+            <button id="sendBtn" type="button" title="Send message" aria-label="Send message">↑</button>
+          </div>
+          <div class="composer-footer"><span><i></i> Session memory enabled</span><span>Private evidence prioritized</span><span>Web search only when needed</span><span class="shortcut">ENTER TO SEND · SHIFT + ENTER FOR NEW LINE</span></div>
+        </div>
+      </section>
+      <footer class="page-footer"><span>CloudOps Sentinel</span><span>Incident intelligence workspace <b>·</b> Built for reliable operations</span></footer>
+    </main>
+  </div>
+  <script src="/static/app.js"></script>
+</body>
+</html>
